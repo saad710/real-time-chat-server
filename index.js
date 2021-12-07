@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const multer = require("multer");
+const cors = require('cors');
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
@@ -15,6 +16,7 @@ const path = require("path");
 
 dotenv.config();
 
+app.use(cors({origin: 'http://localhost:3000'}));
 mongoose.connect(
   process.env.MONGO_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -53,6 +55,7 @@ app.use("/api/posts", postRoute);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 
-app.listen(8000, () => {
+
+app.listen(8800, () => {
   console.log("Backend server is running!");
 });
