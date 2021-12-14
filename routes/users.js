@@ -2,6 +2,16 @@ const User = require("../models/User");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
+//all user
+router.get("/all", async (req, res) => {
+  try {
+    User.find({}, function (err, users) { 
+      res.send(users); 
+      }); 
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //update user
 router.put("/:id", async (req, res) => {
